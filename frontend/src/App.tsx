@@ -32,7 +32,10 @@ function App() {
   return (
     <div style={{ textAlign: "center", padding: "2rem" }}>
       <h1>YOLO11 Person Detection</h1>
-      <input type="file" onChange={(e) => setFile(e.target.files[0])} />
+      <input
+        type="file"
+        onChange={(e) => e.target.files?.[0] && setFile(e.target.files[0])}
+      />
       <button
         onClick={handleUpload}
         style={{
