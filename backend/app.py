@@ -6,7 +6,7 @@ import os
 import uuid
 
 # ---- CONFIG ----
-MODEL_PATH = "yolo11n.pt"       # YOLO11 model path
+MODEL_PATH = "backend/yolo11n.pt"       # YOLO11 model path
 CONF_THRESHOLD = 0.3             # Confidence threshold
 PERSON_CLASS_ID = 0              # 'person' class in COCO dataset
 CUSTOM_SPLIT_X = None            # Custom vertical split (optional)

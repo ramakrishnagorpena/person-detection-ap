@@ -19,6 +19,8 @@ dist/
 
 # Model files (if large)
 *.pt
+!backend/yolo11n.pt
+
 
 
 # Logs
