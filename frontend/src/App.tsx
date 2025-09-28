@@ -2,7 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 
 function App() {
-  const [file, setFile] = useState(null);
+  const [file, setFile] = useState<File | null>(null);
   const [outputUrl, setOutputUrl] = useState("");
   const [counts, setCounts] = useState({ left: 0, right: 0 });
 
