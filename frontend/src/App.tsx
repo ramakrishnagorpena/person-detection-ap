@@ -12,11 +12,17 @@ function App() {
     formData.append("file", file);
 
     try {
-      const res = await axios.post("http://127.0.0.1:5000/detect", formData, {
-        headers: { "Content-Type": "multipart/form-data" },
-      });
+      const res = await axios.post(
+        "https://person-detection-ap.onrender.com/detect",
+        formData,
+        {
+          headers: { "Content-Type": "multipart/form-data" },
+        }
+      );
       setCounts({ left: res.data.left_count, right: res.data.right_count });
-      setOutputUrl(`http://127.0.0.1:5000/output?t=${Date.now()}`);
+      setOutputUrl(
+        `https://person-detection-ap.onrender.com/output?t=${Date.now()}`
+      );
     } catch (err) {
       console.error(err);
       alert("Error uploading image.");
