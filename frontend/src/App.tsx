@@ -2,7 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 
 function App() {
-  const [file, setFile] = useState<File | null>(null);
+  const [file, setFile] = useState(null);
   const [outputUrl, setOutputUrl] = useState("");
   const [counts, setCounts] = useState({ left: 0, right: 0 });
 
@@ -20,9 +20,7 @@ function App() {
         }
       );
       setCounts({ left: res.data.left_count, right: res.data.right_count });
-      setOutputUrl(
-        `https://person-detection-ap.onrender.com/output?t=${Date.now()}`
-      );
+      setOutputUrl(res.data.output_image_url); // <-- use actual URL from backend
     } catch (err) {
       console.error(err);
       alert("Error uploading image.");
@@ -32,10 +30,7 @@ function App() {
   return (
     <div style={{ textAlign: "center", padding: "2rem" }}>
       <h1>YOLO11 Person Detection</h1>
-      <input
-        type="file"
-        onChange={(e) => e.target.files?.[0] && setFile(e.target.files[0])}
-      />
+      <input type="file" onChange={(e) => setFile(e.target.files[0])} />
       <button
         onClick={handleUpload}
         style={{
