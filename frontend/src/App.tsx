@@ -2,7 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 
 function App() {
-  const [file, setFile] = useState(null);
+  const [file, setFile] = useState<File | null>(null);
   const [outputUrl, setOutputUrl] = useState("");
   const [counts, setCounts] = useState({ left: 0, right: 0 });
 
@@ -35,7 +35,10 @@ function App() {
   return (
     <div style={{ textAlign: "center", padding: "2rem" }}>
       <h1>YOLO11 Person Detection</h1>
-      <input type="file" onChange={(e) => setFile(e.target.files[0])} />
+      <input
+        type="file"
+        onChange={(e) => setFile(e.target.files?.[0] ?? null)}
+      />
       <button
         onClick={handleUpload}
         style={{
