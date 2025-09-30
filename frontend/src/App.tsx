@@ -7,7 +7,8 @@ function App() {
   const [counts, setCounts] = useState({ left: 0, right: 0 });
 
   const handleUpload = async () => {
-    if (!file) return;
+    if (!file) return alert("Please select a file first.");
+
     const formData = new FormData();
     formData.append("file", file);
 
@@ -15,15 +16,19 @@ function App() {
       const res = await axios.post(
         "https://person-detection-ap.onrender.com/detect",
         formData,
-        {
-          headers: { "Content-Type": "multipart/form-data" },
-        }
+        { headers: { "Content-Type": "multipart/form-data" } }
       );
+
+      if (res.data.error) {
+        alert("Backend Error: " + res.data.error);
+        return;
+      }
+
       setCounts({ left: res.data.left_count, right: res.data.right_count });
-      setOutputUrl(res.data.output_image_url); // <-- use actual URL from backend
+      setOutputUrl(res.data.output_image_url);
     } catch (err) {
-      console.error(err);
-      alert("Error uploading image.");
+      console.error("Upload error:", err);
+      alert("Something went wrong. Check server logs.");
     }
   };
 
